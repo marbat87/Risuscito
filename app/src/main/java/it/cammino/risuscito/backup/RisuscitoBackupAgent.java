@@ -1,8 +1,9 @@
 package it.cammino.risuscito.backup;
 
-import android.app.backup.BackupAgent;
+import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
+import android.app.backup.SharedPreferencesBackupHelper;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
@@ -20,9 +21,23 @@ import java.nio.channels.FileChannel;
 /**
  * Created by marcello.battain on 18/03/2015.
  */
-public class RisuscitoBackupAgent extends BackupAgent {
+public class RisuscitoBackupAgent extends BackupAgentHelper {
 
-    private static final String DATBASE_BACKUP_KEY = "DBCanti";
+    // The name of the SharedPreferences file
+    static final String PREFS = "it_cammino_risuscito_preferences";
+
+    // A key to uniquely identify the set of backup data
+    static final String PREFS_BACKUP_KEY = "prefs";
+
+    static final String DATBASE_BACKUP_KEY = "DBCanti";
+
+    // Allocate a helper and add it to the backup agent
+    @Override
+    public void onCreate() {
+        SharedPreferencesBackupHelper helper =
+                new SharedPreferencesBackupHelper(this, PREFS);
+        addHelper(PREFS_BACKUP_KEY, helper);
+    }
 
     @Override
     public void onBackup(ParcelFileDescriptor oldState
