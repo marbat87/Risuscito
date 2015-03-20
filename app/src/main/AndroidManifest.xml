@@ -19,7 +19,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/RisuscitoTheme" >
+        android:theme="@style/RisuscitoTheme"
+        android:backupAgent=".backup.RisuscitoBackupAgent">
+        <meta-data android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIO6sf3-xMzerrU0MXV92UWF9fbZUg0vtedd9SBg" />
         <activity
             android:name="it.cammino.risuscito.MainActivity"
             android:theme="@style/RisuscitoTheme" >
@@ -50,26 +53,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.cammino.risuscito.CustomLists" />
         </activity>
-        <!--<activity-->
-            <!--android:name="com.ipaulpro.afilechooser.FileChooserActivity"-->
-            <!--android:exported="true"-->
-            <!--android:icon="@drawable/abc_ic_ab_back_mtrl_am_alpha"-->
-            <!--android:theme="@style/Theme.AppCompat.Light">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.GET_CONTENT" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.OPENABLE" />-->
-                <!--<data android:mimeType="audio/mpeg" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
         <activity
             android:name="com.nononsenseapps.filepicker.FilePickerActivity"
             android:label="@string/app_name"
             android:theme="@style/FilePicker.Theme">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.GET_CONTENT" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
         </activity>
     </application>
 

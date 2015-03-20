@@ -2,6 +2,7 @@ package it.cammino.risuscito;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.backup.BackupManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,7 @@ public class PreferencesFragment extends Fragment {
     private AlertDialogPro languageDialog;
     private AlertDialogPro defIndexDialog;
     private AlertDialogPro defMemoryDialog;
+    BackupManager mBackupManager;
 
     private int checkedItem;
 
@@ -51,6 +53,8 @@ public class PreferencesFragment extends Fragment {
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_activity_settings);
         ((MainActivity) getActivity()).getSupportActionBar()
                 .setElevation(dpToPx(getResources().getInteger(R.integer.toolbar_elevation)));
+
+        mBackupManager = new BackupManager(getActivity());
 
         screenSwitch = (SwitchCompat) rootView.findViewById(R.id.screen_on);
 
@@ -77,6 +81,7 @@ public class PreferencesFragment extends Fragment {
                 } else {
                     editor.apply();
                 }
+                mBackupManager.dataChanged();
             }
         });
 
@@ -119,6 +124,7 @@ public class PreferencesFragment extends Fragment {
                 } else {
                     editor.apply();
                 }
+                mBackupManager.dataChanged();
             }
         });
 
@@ -154,6 +160,7 @@ public class PreferencesFragment extends Fragment {
                 } else {
                     editor.apply();
                 }
+                mBackupManager.dataChanged();
             }
         });
 
@@ -190,6 +197,7 @@ public class PreferencesFragment extends Fragment {
                 } else {
                     editor.apply();
                 }
+                mBackupManager.dataChanged();
             }
         });
 
@@ -351,6 +359,7 @@ public class PreferencesFragment extends Fragment {
                 } else {
                     editor.apply();
                 }
+                mBackupManager.dataChanged();
             }
         });
 
@@ -437,6 +446,7 @@ public class PreferencesFragment extends Fragment {
                     } else {
                         editor.apply();
                     }
+                    mBackupManager.dataChanged();
                     getActivity().setRequestedOrientation(prevOrientation);
                     break;
                 case Utility.PREFERENCE_SAVELOC_OK:
@@ -449,6 +459,7 @@ public class PreferencesFragment extends Fragment {
                     } else {
                         editor.apply();
                     }
+                    mBackupManager.dataChanged();
                     getActivity().setRequestedOrientation(prevOrientation);
                     break;
                 case Utility.PREFERENCE_LANGUAGE_OK:
@@ -468,6 +479,7 @@ public class PreferencesFragment extends Fragment {
                     } else {
                         editor.apply();
                     }
+                    mBackupManager.dataChanged();
                     getActivity().setRequestedOrientation(prevOrientation);
                     Intent i = getActivity().getBaseContext().getPackageManager()
                             .getLaunchIntentForPackage(getActivity().getBaseContext().getPackageName());

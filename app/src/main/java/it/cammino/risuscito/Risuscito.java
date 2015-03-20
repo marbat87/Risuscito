@@ -2,6 +2,8 @@ package it.cammino.risuscito;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.backup.BackupManager;
+import android.app.backup.RestoreObserver;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -14,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -114,6 +117,14 @@ public class Risuscito extends Fragment {
                         if(PreferenceManager
                                 .getDefaultSharedPreferences(getActivity())
                                 .getBoolean(FIRST_OPEN_MENU, true)) {
+                            BackupManager mBackupManager = new BackupManager(getActivity());
+                            mBackupManager.requestRestore(
+                                    new RestoreObserver() {
+                                        public void restoreFinished(int error) {
+                                            Log.v(getClass().toString(), "Restore finished, error = " + error);
+                                        }
+                                    }
+                            );
                             SharedPreferences.Editor editor = PreferenceManager
                                     .getDefaultSharedPreferences(getActivity())
                                     .edit();

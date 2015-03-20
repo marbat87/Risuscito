@@ -25,6 +25,10 @@ public class DatabaseCanti extends SQLiteOpenHelper {
         this.appContext = context;
     }
 
+    public DatabaseCanti(Context context, String path) {
+        super(context, path + "/" + DB_NAME, null, DB_VERSION);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
